@@ -1,9 +1,11 @@
 package p1;
 
+import java.util.Random;
+
 /**
  * Superclasse abstrata Veiculo
  * @author Victtor da Silva Mendes
- * @version 0.1
+ * @version 0.2
  */
 public abstract class Veiculo {
     /**
@@ -116,7 +118,44 @@ public abstract class Veiculo {
         return prioridade;
     }
     
-    private int carry; /// variável que guarda a quantidade quebrada de movimento que o veículo acumulou
+    /**
+     * Movimenta o veículo com a velocidade apropriada em uma direção aleatória
+     * @param m mundo em que o veículo irá se mover
+     * @since 0.2
+     */
+    public void move(Mundo m) {
+        int movimento;
+        carry += velocidade;
+        /* Distribui o movimento carregado em um inteiro */
+        movimento = (int) carry;
+        carry -= movimento;
+        
+        /* Se o movimento acumulado for suficiente para mover o veículo,
+         * ele irá se mover em uma direção aleatória
+         */
+        if (movimento >= 1) {
+            Random rand = new Random();
+            int num = rand.nextInt(4);
+            switch (num) {
+                case 0: //up
+                    setY(y-movimento, m.getTamanho_y());
+                    break;
+                case 1: //down
+                    setY(y+movimento, m.getTamanho_y());
+                    break;
+                case 2: //left
+                    setX(x-movimento, m.getTamanho_x());
+                    break;
+                case 3: //right
+                    setX(x+movimento, m.getTamanho_x());
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    private double carry; /// variável que guarda a quantidade quebrada de movimento que o veículo acumulou
     private int x;
     private int y;
     private double velocidade;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 0.1
+ * @version 0.2
  */
 public class Mundo {
     /**
@@ -66,6 +66,17 @@ public class Mundo {
                 System.out.print(novoMapa[i][j]);
             }
             System.out.println();
+        }
+    }
+    
+    /**
+     * Chama a função <b>move()</b> para todos os veículos no mundo
+     * @param arr lista de todos os veículos no mundo
+     * @since 0.2
+     */
+    public void move(ArrayList<Veiculo> arr) {
+        for (int i = 0; i < arr.size(); i++) {
+            arr.get(i).move(this);
         }
     }
     

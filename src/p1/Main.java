@@ -6,15 +6,16 @@ import java.util.Random;
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
- * @version 0.1
+ * @version 0.2
  */
 public class Main {
 
     /**
      * Função main
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Mundo mundo = new Mundo(30, 60);
         Random rand = new Random();
         String[] arrTipo = {"Scooter", "Cub", "Street", "Trail", "Naked", "Esportiva", "Touring", "Trial", "Triciclo"};
@@ -52,6 +53,12 @@ public class Main {
                 default:
                     break;
             }
+        }
+        for (int i = 0; i < 10; i++) {
+            mundo.desenhaMundo(arr);
+            System.out.println("------------------------------------------------------------");
+            mundo.move(arr);
+            Thread.sleep(1000);
         }
         mundo.desenhaMundo(arr);
     }
