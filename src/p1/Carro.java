@@ -3,7 +3,7 @@ package p1;
 /**
  * Classe Carro subclasse de Veiculo
  * @author Victtor da Silva Mendes
- * @version 0.2
+ * @version 0.3
  */
 public class Carro extends Veiculo {
     /**
@@ -14,7 +14,7 @@ public class Carro extends Veiculo {
      * @param num_passageiros número de passageiros dentro do carro
      */
     public Carro(Mundo m, int x, int y, int num_passageiros) {
-        super(m, x, y, 2, 3, "Carro");
+        super(m, x, y, 2, 3, "\u001B[41m"); //Vermelho
         this.num_passageiros = num_passageiros;
     }
 

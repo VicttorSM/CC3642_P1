@@ -3,7 +3,7 @@ package p1;
 /**
  * Classe Bicicleta subclasse de Veiculo
  * @author Victtor da Silva Mendes
- * @version 0.2
+ * @version 0.3
  */
 public class Bicicleta extends Veiculo {
     /**
@@ -13,7 +13,7 @@ public class Bicicleta extends Veiculo {
      * @param y posição <u>y</u> (linha) da bicicleta
      */
     public Bicicleta(Mundo m, int x, int y) {
-        super(m, x, y, 0.5, 1, "Bicicleta");
+        super(m, x, y, 0.5, 1, "\u001B[42m"); //Verde
     }
 
 }

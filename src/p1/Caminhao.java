@@ -3,7 +3,7 @@ package p1;
 /**
  * Classe Caminhão subclasse de Veiculo
  * @author Victtor da Silva Mendes
- * @version 0.2
+ * @version 0.3
  */
 public class Caminhao extends Veiculo {
     /**
@@ -14,7 +14,7 @@ public class Caminhao extends Veiculo {
      * @param capacidade_carga capacidade de carga do caminhão em kg
      */
     public Caminhao(Mundo m, int x, int y, int capacidade_carga) {
-        super(m, x, y, 1, 4, "Caminhao");
+        super(m, x, y, 1, 4, "\u001B[45m"); //Roxo
         this.capacidade_carga = capacidade_carga;
     }
     

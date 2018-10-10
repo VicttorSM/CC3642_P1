@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
- * @version 0.2
+ * @version 0.3
  */
 public class Main {
 
@@ -54,7 +54,7 @@ public class Main {
                     break;
             }
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             mundo.desenhaMundo(arr);
             System.out.println("------------------------------------------------------------");
             mundo.move(arr);

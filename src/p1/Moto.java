@@ -3,7 +3,7 @@ package p1;
 /**
  * Classe Moto subclasse de Veiculo
  * @author Victtor da Silva Mendes
- * @version 0.2
+ * @version 0.3
  */
 public class Moto extends Veiculo {
     /**
@@ -14,7 +14,7 @@ public class Moto extends Veiculo {
      * @param tipo tipo da moto
      */
     public Moto(Mundo m, int x, int y, String tipo) {
-        super(m, x, y, 3, 2, "Moto");
+        super(m, x, y, 3, 2, "\u001B[44m"); //Azul
         this.tipo = tipo;
     }
 
