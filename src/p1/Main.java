@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
- * @version 0.3
+ * @version 0.4
  */
 public class Main {
 
@@ -55,11 +55,12 @@ public class Main {
             }
         }
         for (int i = 0; i < 50; i++) {
+            mundo.cont.print(arr);
             mundo.desenhaMundo(arr);
-            System.out.println("------------------------------------------------------------");
             mundo.move(arr);
             Thread.sleep(1000);
         }
+        mundo.cont.print(arr);
         mundo.desenhaMundo(arr);
     }
     

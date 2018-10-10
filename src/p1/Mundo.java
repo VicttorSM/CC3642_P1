@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 0.3
+ * @version 0.4
  */
 public class Mundo {
     /**
@@ -14,6 +14,7 @@ public class Mundo {
      * @param coluna quantidade de colunas da matriz mapa
      */
     public Mundo(int linha, int coluna) {
+        cont = new Contador();
         this.tamanho_x = coluna;
         this.tamanho_y = linha;
         mapa = new int[linha][coluna];
@@ -24,6 +25,7 @@ public class Mundo {
         }
     }
     
+    public Contador cont;
     public int[][] mapa;
 
     /**
@@ -74,6 +76,7 @@ public class Mundo {
             }
             System.out.println(); //Pula linha
         }
+        System.out.print("\u001B[0m"); //Reset
     }
     
     /**
