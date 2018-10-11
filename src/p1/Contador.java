@@ -54,6 +54,7 @@ public class Contador {
      * que ja esta armazenada na classe com as suas respectivas cores 
      */
     public void print() {
+        System.out.println();
         System.out.printf("%s Caminhao: %-4d %s", corCaminhao, caminhao, reset);
         System.out.printf("%s Carro: %-4d %s", corCarro, carro, reset);
         System.out.printf("%s Moto: %-4d %s", corMoto, moto, reset);

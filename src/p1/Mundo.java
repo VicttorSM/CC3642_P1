@@ -88,6 +88,57 @@ public class Mundo {
         for (int i = 0; i < arr.size(); i++) {
             arr.get(i).move(this);
         }
+        colidir(arr);
+    }
+    
+    /**
+     * Função responsável por decidir quem vai ser destruido numa colisão
+     * @param arr lista de todos os veículos no mundo
+     * @param vec lista dos veículos envolvidos na colisão
+     */
+    private void destruir(ArrayList<Veiculo> arr, ArrayList<Veiculo> vec) {
+        Veiculo maisForte = null;
+        int maior = 0;
+        int quant = 0;
+        /* Procura pelo veículo mais resistente */
+        for (int i = 0; i < vec.size(); i++) {
+            int prioridade = vec.get(i).getPrioridade();
+            if (prioridade > maior) {
+                maisForte = vec.get(i);
+                maior = prioridade;
+                quant = 1;
+            }
+            else if (prioridade == maior) {
+                quant++;
+            }
+        }
+        /* Se apenas um veículo tiver a maior resistencia */
+        if (quant <= 1) {
+            vec.remove(maisForte); // É removido da lista de veículos que serão destruidos
+        }
+        /* Destrói todos veículos na lista vec */
+        for (int i = 0; i < vec.size(); i++) {
+            arr.remove(vec.get(i));
+        }
+    }
+    
+    /**
+     * Função que procura colisões entre os veículos no mapa
+     * @param arr lista de todos os veículos no mundo
+     */
+    private void colidir(ArrayList<Veiculo> arr) {
+        for (int i = 0; i < arr.size(); i++) {
+            ArrayList<Veiculo> vec = new ArrayList<>();
+            vec.add(arr.get(i));
+            for (int j = i+1; j < arr.size(); j++) {
+                if (arr.get(i).getX() == arr.get(j).getX() && arr.get(i).getY() == arr.get(j).getY()) {
+                    vec.add(arr.get(j));
+                }
+            }
+            if (vec.size() > 1) {
+                destruir(arr, vec);
+            }
+        }
     }
     
     private final int tamanho_x;

@@ -54,14 +54,12 @@ public class Main {
                     break;
             }
         }
-        for (int i = 0; i < 50; i++) {
+        do {
             mundo.cont.print(arr);
             mundo.desenhaMundo(arr);
             mundo.move(arr);
             Thread.sleep(1000);
-        }
-        mundo.cont.print(arr);
-        mundo.desenhaMundo(arr);
+        } while (mundo.cont.getSoma() > 0);
     }
     
 }
