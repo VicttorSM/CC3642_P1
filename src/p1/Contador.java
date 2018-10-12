@@ -5,7 +5,8 @@ import java.util.ArrayList;
 /**
  * Classe Contador responsável pela contagem dos veículos
  * @author Victtor da Silva Mendes
- * @version 0.5
+ * @version 0.6
+ * @since 0.4
  */
 public class Contador {
     /**
@@ -140,6 +141,71 @@ public class Contador {
      */
     public String getCorCaminhao() {
         return corCaminhao;
+    }
+
+    /**
+     * Vai somar ou subtrair 1 em um tipo de veículo
+     * @param soma se for <b>true</b> soma 1, se for <b>false</b> tira 1
+     * @param id numero que refere a prioridade do tipo de veículo
+     * @since 0.6
+     */
+    public void incrementaVeiculo(boolean soma, int id) {
+        switch (id) {
+            case 1:
+                incrementaBicicleta(soma);
+                break;
+            case 2:
+                incrementaMoto(soma);
+                break;
+            case 3:
+                incrementaCarro(soma);
+                break;
+            case 4:
+                incrementaCaminhao(soma);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    /**
+     * Adiciona ou remove uma bicicleta
+     * @param soma se for <b>true</b> soma 1, se for <b>false</b> tira 1
+     * @since 0.6
+     */
+    public void incrementaBicicleta(boolean soma) {
+        if (soma) bicicleta++;
+        else bicicleta--;
+    }
+
+    /**
+     * Adiciona ou remove uma moto
+     * @param soma se for <b>true</b> soma 1, se for <b>false</b> tira 1
+     * @since 0.6
+     */
+    public void incrementaMoto(boolean soma) {
+        if (soma) moto++;
+        else moto--;
+    }
+
+    /**
+     * Adiciona ou remove um carro
+     * @param soma se for <b>true</b> soma 1, se for <b>false</b> tira 1
+     * @since 0.6
+     */
+    public void incrementaCarro(boolean soma) {
+        if (soma) carro++;
+        else carro--;
+    }
+
+    /**
+     * Adiciona ou remove um caminhão
+     * @param soma se for <b>true</b> soma 1, se for <b>false</b> tira 1
+     * @since 0.6
+     */
+    public void incrementaCaminhao(boolean soma) {
+        if (soma) caminhao++;
+        else caminhao--;
     }
     
     

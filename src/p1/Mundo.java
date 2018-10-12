@@ -1,11 +1,12 @@
 package p1;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 0.5
+ * @version 0.6
  */
 public class Mundo {
     /**
@@ -119,6 +120,7 @@ public class Mundo {
         }
         /* Destrói todos veículos na lista vec */
         for (int i = 0; i < vec.size(); i++) {
+            cont.incrementaVeiculo(false, vec.get(i).getPrioridade());
             arr.remove(vec.get(i));
         }
     }
@@ -141,6 +143,37 @@ public class Mundo {
                 destruir(arr, vec);
             }
         }
+    }
+    
+    /**
+     * Função que cria um veículo com propriedades aleatórias
+     * @param arr lista de todos veículos no mundo
+     * @param id numero que refere a prioridade do tipo de veículo
+     * @since 0.6
+     */
+    public void criaVeiculo(ArrayList<Veiculo> arr, int id) {
+        Random rand = new Random();
+        String[] arrTipo = {"Scooter", "Cub", "Street", "Trail", "Naked", "Esportiva", "Touring", "Trial", "Triciclo"};
+        switch (id) {
+            case 1:
+                arr.add( new Bicicleta(this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y())) );
+                cont.incrementaBicicleta(true);
+                break;
+            case 2:
+                arr.add( new Moto     (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), arrTipo[rand.nextInt(arrTipo.length)]) );
+                cont.incrementaMoto(true);
+                break;
+            case 3:
+                arr.add( new Carro    (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(5)+1) );
+                cont.incrementaCarro(true);
+                break;
+            case 4:
+                arr.add( new Caminhao (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(7000)+1000) );
+                cont.incrementaCaminhao(true);
+                break;
+            default:
+                break;
+        }        
     }
     
     private final int tamanho_x;
