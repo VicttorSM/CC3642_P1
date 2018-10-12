@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
- * @version 0.4
+ * @version 0.5
  */
 public class Main {
 

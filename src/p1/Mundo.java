@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 0.4
+ * @version 0.5
  */
 public class Mundo {
     /**
@@ -95,6 +95,7 @@ public class Mundo {
      * Função responsável por decidir quem vai ser destruido numa colisão
      * @param arr lista de todos os veículos no mundo
      * @param vec lista dos veículos envolvidos na colisão
+     * @since 0.5
      */
     private void destruir(ArrayList<Veiculo> arr, ArrayList<Veiculo> vec) {
         Veiculo maisForte = null;
@@ -125,6 +126,7 @@ public class Mundo {
     /**
      * Função que procura colisões entre os veículos no mapa
      * @param arr lista de todos os veículos no mundo
+     * @since 0.5
      */
     private void colidir(ArrayList<Veiculo> arr) {
         for (int i = 0; i < arr.size(); i++) {
