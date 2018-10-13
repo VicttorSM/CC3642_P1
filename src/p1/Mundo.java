@@ -188,7 +188,7 @@ public class Mundo {
     }
     
     /**
-     * Função que remove um veículo pelo objeto
+     * Função que remove um veículo pelo index
      * @param i index do veículo que será removido
      * @since 1.1
      */

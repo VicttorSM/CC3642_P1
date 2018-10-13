@@ -3,7 +3,7 @@ package p1;
 /**
  * Classe Caminhão subclasse de Veiculo
  * @author Victtor da Silva Mendes
- * @version 1.0
+ * @version 1.2
  */
 public class Caminhao extends Veiculo {
     /**

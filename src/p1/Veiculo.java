@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Superclasse abstrata Veiculo
  * @author Victtor da Silva Mendes
- * @version 1.0
+ * @version 1.2
  */
 public abstract class Veiculo {
     /**
