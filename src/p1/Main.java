@@ -1,7 +1,5 @@
 package p1;
 
-import java.util.ArrayList;
-
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
@@ -17,7 +15,6 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         /* Começa um mundo com 10 fábricas e 10 veículos de cada tipo */
         Mundo mundo = new Mundo(30, 60, 10, 10);
-        ArrayList<Veiculo> arr = new ArrayList<>();
         
         /* Loop de imagens na tela */
         while (mundo.cont.getSoma() > 0) {
