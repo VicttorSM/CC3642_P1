@@ -6,24 +6,27 @@ import java.util.Random;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 0.6
+ * @version 1.0
  */
 public class Mundo {
     /**
      * Construtor Mundo
      * @param linha quantidade de linhas da matriz mapa
      * @param coluna quantidade de colunas da matriz mapa
+     * @param fab número de fábricas que serão criadas
      */
-    public Mundo(int linha, int coluna) {
+    public Mundo(int linha, int coluna, int fab) {
         cont = new Contador();
         this.tamanho_x = coluna;
         this.tamanho_y = linha;
+        this.numFabrica = 0;
         mapa = new int[linha][coluna];
         for(int i = 0; i < linha; i++) {
             for(int j = 0; j < coluna; j++) {
                 mapa[i][j] = 0;
             }
         }
+        criaFabricas(fab);
     }
     
     public Contador cont;
@@ -88,6 +91,11 @@ public class Mundo {
     public void move(ArrayList<Veiculo> arr) {
         for (int i = 0; i < arr.size(); i++) {
             arr.get(i).move(this);
+            /* Se o veiculo parou numa fábrica */
+            if (arr.get(i).inFabrica(this)) {
+                /* Cria 1 veículos do mesmo tipo */
+                criaVeiculo(arr, arr.get(i).getPrioridade());
+            }
         }
         colidir(arr);
     }
@@ -176,6 +184,30 @@ public class Mundo {
         }        
     }
     
+    /**
+     * Função que cria fábricas em lugares aleatórios do mapa
+     * @param num quantidade de fábricas que devem ser criadas
+     * @since 1.0
+     */
+    private void criaFabricas(int num) {
+        /* Verifica se existe espaço suficiente para abrigar as fabricas */
+        int maximo = ((tamanho_x-2) * (tamanho_y-2)) - numFabrica;
+        if (num > maximo) num = maximo;
+        numFabrica += num;
+        Random rand = new Random();
+        for (int i = 0; i < num; i++) {
+            int linha;
+            int coluna;
+            do {
+                linha = rand.nextInt(tamanho_y-2)+1;
+                coluna = rand.nextInt(tamanho_x-2)+1;
+            } while (mapa[linha][coluna] == 9);
+            mapa[linha][coluna] = 9;
+            numFabrica++;
+        }
+    }
+    
+    private int numFabrica;
     private final int tamanho_x;
     private final int tamanho_y;
 }

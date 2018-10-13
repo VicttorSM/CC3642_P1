@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Classe Contador responsável pela contagem dos veículos
  * @author Victtor da Silva Mendes
- * @version 0.6
+ * @version 1.0
  * @since 0.4
  */
 public class Contador {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Classe Principal
  * @author Victtor da Silva Mendes
- * @version 0.6
+ * @version 1.0
  */
 public class Main {
 
@@ -15,7 +15,8 @@ public class Main {
      * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
-        Mundo mundo = new Mundo(30, 60);
+        /* Começa um mundo com 10 fábricas */
+        Mundo mundo = new Mundo(30, 60, 10);
         ArrayList<Veiculo> arr = new ArrayList<>();
         
         /* Cria os 10 veiculos iniciais de cada tipo */
