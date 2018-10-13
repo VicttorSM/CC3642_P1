@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 1.1
+ * @version 1.2
  */
 public class Mundo {
     /**
@@ -172,6 +172,7 @@ public class Mundo {
             }
             if (vec.size() > 1) {
                 destruir(vec);
+                i--;
             }
         }
     }
@@ -241,6 +242,8 @@ public class Mundo {
         int maximo = ((tamanho_x-2) * (tamanho_y-2)) - numFabrica;
         if (num > maximo) num = maximo;
         numFabrica += num;
+        
+        /* Cria as fabricas em locais aleatórios */
         Random rand = new Random();
         for (int i = 0; i < num; i++) {
             int linha;
