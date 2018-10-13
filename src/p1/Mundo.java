@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * Classe Mundo
  * @author Victtor da Silva Mendes
- * @version 1.0
+ * @version 1.1
  */
 public class Mundo {
     /**
@@ -14,18 +14,46 @@ public class Mundo {
      * @param linha quantidade de linhas da matriz mapa
      * @param coluna quantidade de colunas da matriz mapa
      * @param fab número de fábricas que serão criadas
+     * @param veiculos quantidade de veículos de cada tipo que serão criados incialmente
      */
-    public Mundo(int linha, int coluna, int fab) {
+    public Mundo(int linha, int coluna, int fab, int veiculos) {
+        arr = new ArrayList<>();
         cont = new Contador();
         this.tamanho_x = coluna;
         this.tamanho_y = linha;
         this.numFabrica = 0;
         mapa = new int[linha][coluna];
+        boolean[][] temp = new boolean[linha][coluna];
+        /* Se não tiver espaço suficiente para criar os veiculos cria o máximo possivel */
+        int max = linha*coluna;
+        if ((veiculos*4) > max) veiculos = max/4;
+        /* Preenche o mapa */
         for(int i = 0; i < linha; i++) {
             for(int j = 0; j < coluna; j++) {
                 mapa[i][j] = 0;
+                temp[i][j] = false;
             }
         }
+        
+        /* Cria 10 veículos de cada tipo */
+        for (int i = 0; i < veiculos; i++) {
+            for (int tipo = 1; tipo <= 4; tipo++) {
+                int l;
+                int c;
+                /* Verifica as posições para não colidir de primeira */
+                while (true){
+                    Veiculo v = criaVeiculo(tipo);
+                    l = v.getY();
+                    c = v.getX();
+                    if (temp[l][c]) {
+                        removeVeiculo(v);
+                    }
+                    else break;
+                }
+                temp[l][c] = true;
+            }
+        }
+        
         criaFabricas(fab);
     }
     
@@ -50,9 +78,8 @@ public class Mundo {
     
     /**
      * Função que desenha o mundo com todos os veículos
-     * @param arr lista de todos os veículos no mundo
      */
-    public void desenhaMundo(ArrayList<Veiculo> arr) {
+    public void desenhaMundo() {
         /* É feita uma cópia do mapa */
         String[][] novoMapa = new String[tamanho_y][tamanho_x];
         for (int i = 0; i < tamanho_y; i++) {
@@ -85,28 +112,26 @@ public class Mundo {
     
     /**
      * Chama a função <b>move()</b> para todos os veículos no mundo
-     * @param arr lista de todos os veículos no mundo
      * @since 0.2
      */
-    public void move(ArrayList<Veiculo> arr) {
+    public void move() {
         for (int i = 0; i < arr.size(); i++) {
             arr.get(i).move(this);
             /* Se o veiculo parou numa fábrica */
             if (arr.get(i).inFabrica(this)) {
                 /* Cria 1 veículos do mesmo tipo */
-                criaVeiculo(arr, arr.get(i).getPrioridade());
+                criaVeiculo(arr.get(i).getPrioridade());
             }
         }
-        colidir(arr);
+        colidir();
     }
     
     /**
      * Função responsável por decidir quem vai ser destruido numa colisão
-     * @param arr lista de todos os veículos no mundo
      * @param vec lista dos veículos envolvidos na colisão
      * @since 0.5
      */
-    private void destruir(ArrayList<Veiculo> arr, ArrayList<Veiculo> vec) {
+    private void destruir(ArrayList<Veiculo> vec) {
         Veiculo maisForte = null;
         int maior = 0;
         int quant = 0;
@@ -128,17 +153,15 @@ public class Mundo {
         }
         /* Destrói todos veículos na lista vec */
         for (int i = 0; i < vec.size(); i++) {
-            cont.incrementaVeiculo(false, vec.get(i).getPrioridade());
-            arr.remove(vec.get(i));
+            removeVeiculo(vec.get(i));
         }
     }
     
     /**
      * Função que procura colisões entre os veículos no mapa
-     * @param arr lista de todos os veículos no mundo
      * @since 0.5
      */
-    private void colidir(ArrayList<Veiculo> arr) {
+    private void colidir() {
         for (int i = 0; i < arr.size(); i++) {
             ArrayList<Veiculo> vec = new ArrayList<>();
             vec.add(arr.get(i));
@@ -148,40 +171,64 @@ public class Mundo {
                 }
             }
             if (vec.size() > 1) {
-                destruir(arr, vec);
+                destruir(vec);
             }
         }
     }
     
     /**
+     * Função que remove um veículo pelo objeto
+     * @param v veículo que será removido
+     * @since 1.1
+     */
+    public void removeVeiculo(Veiculo v) {
+        cont.incrementaVeiculo(false, v.getPrioridade());
+        arr.remove(v);
+    }
+    
+    /**
+     * Função que remove um veículo pelo objeto
+     * @param i index do veículo que será removido
+     * @since 1.1
+     */
+    public void removeVeiculo(int i) {
+        cont.incrementaVeiculo(false, arr.get(i).getPrioridade());
+        arr.remove(i);
+    }
+    
+    /**
      * Função que cria um veículo com propriedades aleatórias
-     * @param arr lista de todos veículos no mundo
      * @param id numero que refere a prioridade do tipo de veículo
+     * @return veículo que foi criado
      * @since 0.6
      */
-    public void criaVeiculo(ArrayList<Veiculo> arr, int id) {
+    public Veiculo criaVeiculo(int id) {
         Random rand = new Random();
+        Veiculo veiculo = null;
         String[] arrTipo = {"Scooter", "Cub", "Street", "Trail", "Naked", "Esportiva", "Touring", "Trial", "Triciclo"};
         switch (id) {
             case 1:
-                arr.add( new Bicicleta(this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y())) );
+                veiculo = new Bicicleta(this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()));
                 cont.incrementaBicicleta(true);
                 break;
             case 2:
-                arr.add( new Moto     (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), arrTipo[rand.nextInt(arrTipo.length)]) );
+                veiculo = new Moto     (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), arrTipo[rand.nextInt(arrTipo.length)]);
+                
                 cont.incrementaMoto(true);
                 break;
             case 3:
-                arr.add( new Carro    (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(5)+1) );
+                veiculo = new Carro    (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(5)+1);
                 cont.incrementaCarro(true);
                 break;
             case 4:
-                arr.add( new Caminhao (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(7000)+1000) );
+                veiculo = new Caminhao (this, rand.nextInt(getTamanho_x()), rand.nextInt(getTamanho_y()), rand.nextInt(7000)+1000);
                 cont.incrementaCaminhao(true);
                 break;
             default:
                 break;
-        }        
+        }
+        if (veiculo != null) arr.add(veiculo);
+        return veiculo;
     }
     
     /**
@@ -207,6 +254,7 @@ public class Mundo {
         }
     }
     
+    private ArrayList<Veiculo> arr;
     private int numFabrica;
     private final int tamanho_x;
     private final int tamanho_y;
