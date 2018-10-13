@@ -63,7 +63,7 @@ public class Contador {
     }
     
     /**
-     * Função que chama <b>contar(ArrayList<Veiculo>)</b> e <b>print()</b>
+     * Função que chama <b>contar(ArrayList)</b> e <b>print()</b>
      * @param arr ArrayList que contém todos os veículos
      */
     public void print(ArrayList<Veiculo> arr) {
